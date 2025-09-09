@@ -135,7 +135,8 @@ const pricefunc= (pricedataid)=>{
 let totalprice=0;
 const pricemianfunc=(maindetail1)=>{
     
-     const pricedib= document.querySelector(`#pricedib`);
+ const pricedib= document.querySelector(`#pricedib`);
+ 
 
     let div3= document.createElement(`div`);
     div3.classList.add(`flex`,`clear`, `bg-[#dcfce7]`,`items-center`,`py-3`,`px-2`,`rounded-xl`,`justify-between`, `w-full`,`mt-3`)
@@ -147,6 +148,7 @@ const pricemianfunc=(maindetail1)=>{
                         <h3><button onclick="removeItem(this, ${maindetail1.price})" class="text-2xl cursor-pointer text-red-500 ">x</button></h3>
                     </div>`
 pricedib.appendChild(div3)
+  alert(`${maindetail1.name} added succesfully`)
 
  
 
