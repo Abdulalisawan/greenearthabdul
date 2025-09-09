@@ -106,7 +106,7 @@ const displayeachcatvalue =(mainvalue)=>{
     div.innerHTML=`<div class="w-[100%] h-[186px]  bg-gray-400">
                      <img class="w-[100%] h-[100%] object-cover" src="${eachvalue.image}" alt="">
                     </div>
-                    <div>  <h2 class="font-semibold mt-2 text-xl">${eachvalue.name}</h2>
+                    <div>  <h2 onclick="showl(${eachvalue.id})" class="font-semibold mt-2 cursor-pointer text-xl">${eachvalue.name}</h2>
                         <p class="text-gray-500 my-3">${eachvalue.description}</p>
                         </div>
                        <div class="flex justify-between my-6">
