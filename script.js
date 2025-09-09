@@ -10,7 +10,7 @@ const displayCetagories=(categoryvalue)=>{
     const catagorycontent = document.querySelector(`#catagorycontent`);
     for(let eachvalue of categoryvalue ){
         const div1= document.createElement(`div`);
-        div1.innerHTML=`<div onclick="subcetagory(${eachvalue.id})" class="mt-3 text-xl hover:bg-[#a6beaf] py-2 rounded-3xl pl-4"><h1>${eachvalue.category_name}</h1></div>`;
+        div1.innerHTML=`<div id="coloranimate${eachvalue.id}" onclick="subcetagory(${eachvalue.id})" class="mt-3 primarybtncolor text-xl hover:bg-[#a6beaf] py-2 rounded-3xl pl-4"><h1>${eachvalue.category_name}</h1></div>`;
         catagorycontent.appendChild(div1)
     }
 
@@ -51,7 +51,9 @@ const displaytreedata =(alltreedata)=>{
                         <h4 class="  px-2.5 py-1 rounded-3xl bg-[#dcfce7] text-green-600 ">${alldata.category}</h4>
                        <p class="text-xl font-semibold">${alldata.price}</p>
                         </div>
-                        <button class=" text-white text-xl py-4 rounded-full bg-[#15803d] w-full">Add to Cart</button>`
+                       <div class=""> <button onclick="pricefunc(${alldata.id})" class=" text-white text-xl py-4 rounded-full bg-[#15803d]  w-full">Add to Cart</button> </div>`
+                       
+                       
     alltreecontent.appendChild(div);
     spinner(false);
     
@@ -68,7 +70,16 @@ const subcetagory = (valueofid)=>{
     const url = `https://openapi.programming-hero.com/api/category/${valueofid}`
     fetch(url)
     .then(res=>res.json())
-    .then(dataceta=>displayeachcatvalue(dataceta.plants))
+    .then(dataceta=>{ 
+        let primarybtncolor= document.querySelectorAll(`.primarybtncolor`);
+        primarybtncolor.forEach(primarycolor => {
+            primarycolor.classList.remove(`bg-[#15803d]`);
+            
+        });
+        let colorbtn= document.querySelector(`#coloranimate${valueofid}`);
+        colorbtn.classList.add(`bg-[#15803d]`)
+        console.log(colorbtn)
+        displayeachcatvalue(dataceta.plants)})
 
 }
 
@@ -97,3 +108,47 @@ const displayeachcatvalue =(mainvalue)=>{
     }
 
 }
+const pricefunc= (pricedataid)=>{
+    fetch(`https://openapi.programming-hero.com/api/plant/${pricedataid}`)
+    .then(res=>res.json())
+    .then(alldetail=>pricemianfunc(alldetail.plants))
+
+}
+let count =0;
+let totalprice=0;
+const pricemianfunc=(maindetail1)=>{
+    
+
+    const pricedib= document.querySelector(`#pricedib`);
+
+    let div3= document.createElement(`div`);
+    div3.classList.add(`flex`, `bg-[#dcfce7]`,`items-center`,`py-3`,`px-2`,`rounded-xl`,`justify-between`, `w-full`,`mt-3`)
+    div3.innerHTML=`<div>
+                    <h1 class="text-xl font-semibold">${maindetail1.name}</h1>
+                      <p class="price" class="text-gray-500">${maindetail1.price}</p>
+                    </div>
+                    <div>
+                        <h3><i onclick="clear()" class="fa-regular fa-circle-xmark text-2xl "></i></h3>
+                    </div>`
+pricedib.appendChild(div3)
+
+ 
+
+ let price=maindetail1.price;
+ totalprice +=price
+
+  let totalfiv=document.querySelector(`#totalfiv`);
+  totalfiv.textContent=totalprice
+
+
+const clear=()=>{
+    div3
+
+    
+
+}
+
+
+
+}
+
